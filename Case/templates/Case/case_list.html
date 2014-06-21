@@ -1,0 +1,49 @@
+{% extends 'Case/main.html' %}
+{% block content %}
+    <div>
+    <h1 class="text-center">律師救救我！</h1>
+    </div>
+    <hr>
+    <h2>案件列表</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>案號</th>
+            <th>當事人姓名</th>
+            <th>當事人電話</th>
+            <th>逮捕原因</th>
+            <th>逮捕時間</th>
+            <th>案件狀態</th>
+            <th>委任律師</th>
+        </tr>
+        </thead>
+    <tbody>
+    {% for case in case_list %}
+        <tr>
+            <td>{{ case.id }}</td>
+            <td>{{ case.clientName }}</td>
+            <td>{{ case.clientPhone }}</td>
+            <td>{{ case.arrestedReason }}</td>
+            <td>{{ case.arrestedTime }}</td>
+            <td>{% if case.status == 1 %}
+                新案件
+                {% endif %}
+                {% if case.status == 2 %}
+                處理中
+                {% endif %}
+                {% if case.status == 3 %}
+                已完成
+                {% endif %}
+            </td>
+            <td>{{ case.lawyerAssigned.name }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+<h1>律師列表</h1>
+<hr>
+    <img src="http://v1c.im.tv/beta/2013/09/ART1309251044-80050-Icon.jpg">
+    <img src="http://twimg.edgesuite.net/images/ReNews/20130808/420_566e75ee1ddd204c4b9f7e593501a552.jpg">
+    <img src="http://www.lihpao.com/attachments/2014/02/48075_201402062256251p4Q7.jpg">
+    <img src="http://s1.djyimg.com/i6/605091010471535.jpg">
+{% endblock %}

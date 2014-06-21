@@ -1,0 +1,47 @@
+{% extends 'Case/main.html' %}
+{% load staticfiles %}
+
+{% block extend_head %}
+<link href="{% static 'pkg/bootstrap-datetime-picker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+<script src="{% static 'pkg/bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<h1>新增案件</h1>
+<div class="row">
+<div class="col-lg-6">
+<form method="POST" action="{% url 'Case.views.add_case_view' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>求助人姓名</label>
+        <input type="text" name="clientName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>求助人電話</label>
+        <input type="text" name="clientPhone" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>逮捕理由</label>
+        <input type="text" name="arrestedReason" class="form-control"/>
+    </div>
+{#    <div class="form-group">#}
+{#        <label>逮捕時間</label>#}
+{#        <input type="text" name="arrestedTime" class="form-control" /><br>#}
+{#    </div>#}
+    <div class="form-group">
+        <label>所在縣市</label>
+        <select name="placeCounty" class="form-control" >
+        {% for county in county_list %}
+        <option value="{{ county.id }}">{{ county.name }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div class="form-group">
+        <label>地點描述</label>
+        <textarea name="placeDescription" class="form-control"></textarea>
+    </div>
+    <button class="btn btn-default" >按我</button>
+</form>
+</div>
+</div>
+{% endblock %}
